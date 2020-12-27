@@ -8,10 +8,10 @@ from rsl_version import version_hash_1, version_hash_2, VersionError, check_rand
 check_rando_version()
 
 # Please set the weights file you with to load
-weights = 'rrl' # The default Rando Rando League Season 2 weights
+# weights = 'rrl' # The default Rando Rando League Season 2 weights
 # weights = 'full-random' # Every setting with even weights
 # weights = 'coop' # Uses the rrl weights with some extra modifications
-# weights = 'my_weights.json' # Provide your own weights file. If the specified file does not exist, this will create one with equal weights
+weights = 'MOoTR.json' # Provide your own weights file. If the specified file does not exist, this will create one with equal weights
 # mw_weights_file = 'rsl_multiworld.json' # If this variable exists, load this file and use it to edit loaded weights
 
 COOP_SETTINGS = False # Change some settings to be more coop friendly
@@ -63,7 +63,7 @@ def generate_balanced_weights(fname='default_weights.json'):
                 list(get_settings_from_tab('starting_tab'))
 
     exclude_from_weights = ['bridge_tokens', 'lacs_tokens', 'triforce_goal_per_world', 'disabled_locations',
-                            'allowed_tricks', 'starting_equipment', 'starting_items', 'starting_songs']
+                            'allowed_tricks', 'starting_equipment', 'starting_items', 'starting_songs', "bingosync_url"]
     weight_dict = {}
     for name in settings_to_randomize:
         if name not in exclude_from_weights:
@@ -81,12 +81,18 @@ def generate_balanced_weights(fname='default_weights.json'):
 def add_standard_tricks(random_settings):
     """ Add the tricks enabled in standard to the plando. """
     random_settings['randomize_settings'] = False
-    random_settings['disabled_locations'] = []
+    random_settings['disabled_locations'] = ["Kak 40 Gold Skulltula Reward"
+        "Kak 50 Gold Skulltula Reward",
+        "GF HBA 1500 Points",
+        "Deku Theater Mask of Truth",
+        "DMC GS Crate",
+        "DMC Deku Scrub",
+        "KF Links House Cow"]
     random_settings['allowed_tricks'] = ["logic_fewer_tunic_requirements", "logic_grottos_without_agony",
         "logic_child_deadhand", "logic_man_on_roof", "logic_dc_jump", "logic_rusted_switches", "logic_windmill_poh",
         "logic_crater_bean_poh_with_hovers", "logic_forest_vines", "logic_goron_city_pot_with_strength",
         "logic_lens_botw", "logic_lens_castle", "logic_lens_gtg", "logic_lens_shadow",
-        "logic_lens_shadow_back", "logic_lens_spirit"]
+        "logic_lens_spirit"]
 
 
 def add_rrl_tricks(random_settings):
@@ -166,7 +172,8 @@ def main():
     # Draw the random settings
     random_settings = {}
     for setting, options in weight_dict.items():
-        random_settings[setting] = random.choices(list(options.keys()), weights=list(options.values()))[0]
+        if not setting in BROKEN_SETTINGS:
+            random_settings[setting] = random.choices(list(options.keys()), weights=list(options.values()))[0]
 
 
     # Check conditional settings for rrl
