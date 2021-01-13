@@ -81,7 +81,7 @@ def generate_balanced_weights(fname='default_weights.json'):
 def add_standard_tricks(random_settings):
     """ Add the tricks enabled in standard to the plando. """
     random_settings['randomize_settings'] = False
-    random_settings['disabled_locations'] = ["Kak 40 Gold Skulltula Reward"
+    random_settings['disabled_locations'] = ["Kak 40 Gold Skulltula Reward",
         "Kak 50 Gold Skulltula Reward",
         "GF HBA 1500 Points",
         "Deku Theater Mask of Truth",

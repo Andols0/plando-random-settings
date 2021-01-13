@@ -1,6 +1,6 @@
 __version__ = "6.0.2 R-3 v1"
-version_hash_1 = "Cucco"
-version_hash_2 = "Cucco"
+version_hash_1 = "Mirror Shield"
+version_hash_2 = "Longshot"
 
 
 class VersionError(Exception):
