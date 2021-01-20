@@ -1,4 +1,4 @@
-__version__ = "6.0.2 R-3 v1"
+__version__ = "6.0.12 R-1 v1"
 version_hash_1 = "Mirror Shield"
 version_hash_2 = "Longshot"
 
