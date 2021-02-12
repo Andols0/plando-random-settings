@@ -81,13 +81,12 @@ def generate_balanced_weights(fname='default_weights.json'):
 def add_standard_tricks(random_settings):
     """ Add the tricks enabled in standard to the plando. """
     random_settings['randomize_settings'] = False
-    random_settings['disabled_locations'] = ["Kak 40 Gold Skulltula Reward",
-        "Kak 50 Gold Skulltula Reward",
-        "GF HBA 1500 Points",
+    random_settings['disabled_locations'] = ["GF HBA 1500 Points",
         "Deku Theater Mask of Truth",
         "DMC GS Crate",
         "DMC Deku Scrub",
         "KF Links House Cow"]
+    conds.include_40_50_skulls(random_settings)
     random_settings['allowed_tricks'] = ["logic_fewer_tunic_requirements", "logic_grottos_without_agony",
         "logic_child_deadhand", "logic_man_on_roof", "logic_dc_jump", "logic_rusted_switches", "logic_windmill_poh",
         "logic_crater_bean_poh_with_hovers", "logic_forest_vines", "logic_goron_city_pot_with_strength",
@@ -184,6 +183,7 @@ def main():
 
 
     # Add the tricks to the plando
+    
     if STANDARD_TRICKS:
         add_standard_tricks(random_settings)
     if RRL_TRICKS:
