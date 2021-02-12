@@ -25,12 +25,6 @@ def disable_fortresskeys_independence(random_settings):
 
 def include_40_50_skulls(random_settings):
     """ If Tokensanity is rolled, include 40 and 50 skulls check. """
-    
     if random_settings['tokensanity'] in ['off']:
-        random_settings['disabled_locations'] = ["Kak 40 Gold Skulltula Reward",
-        "Kak 50 Gold Skulltula Reward",
-        "GF HBA 1500 Points",
-        "Deku Theater Mask of Truth",
-        "DMC GS Crate",
-        "DMC Deku Scrub",
-        "KF Links House Cow"]
+        random_settings['disabled_locations'].extend(["Kak 40 Gold Skulltula Reward",
+        "Kak 50 Gold Skulltula Reward"])
