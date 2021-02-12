@@ -16,8 +16,8 @@ weights = 'MOoTR.json' # Provide your own weights file. If the specified file do
 
 COOP_SETTINGS = False # Change some settings to be more coop friendly
 STANDARD_TRICKS = True # Whether or not to enable all of the tricks in Standard settings
-RRL_TRICKS = True # Add the extra tricks that we enable for rando rando
-RRL_CONDITIONALS = True # In rando rando we have a couple conditional cases. Ensure that they are met
+RRL_TRICKS = False # Add the extra tricks that we enable for rando rando
+RRL_CONDITIONALS = False # In rando rando we have a couple conditional cases. Ensure that they are met
 STARTING_ITEMS = True # Draw starting items, songs, and equipment from a geometric distribution
 
 BROKEN_SETTINGS = [] # If any settings are broken, add their name here and they will be non-randomized
