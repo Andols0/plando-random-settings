@@ -194,6 +194,8 @@ def main():
     if STARTING_ITEMS:
         draw_starting_item_pool(random_settings, start_with)
 
+    # Make sure triforce hunt does not have to many pieces.
+    conds.max_triforce_pieces(random_settings)
 
     # Format numbers and bools to not be strings
     for setting, value in random_settings.items():
