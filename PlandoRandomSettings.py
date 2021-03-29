@@ -19,6 +19,7 @@ STANDARD_TRICKS = True # Whether or not to enable all of the tricks in Standard 
 RRL_TRICKS = True # Add the extra tricks that we enable for rando rando
 RRL_CONDITIONALS = True # In rando rando we have a couple conditional cases. Ensure that they are met
 STARTING_ITEMS = True # Draw starting items, songs, and equipment from a geometric distribution
+DUNGEON_DIVING = False # Activate Dungeon Diving mode
 
 BROKEN_SETTINGS = [] # If any settings are broken, add their name here and they will be non-randomized
 
@@ -81,13 +82,12 @@ def generate_balanced_weights(fname='default_weights.json'):
 def add_standard_tricks(random_settings):
     """ Add the tricks enabled in standard to the plando. """
     random_settings['randomize_settings'] = False
-    random_settings['disabled_locations'] = ["Kak 40 Gold Skulltula Reward",
-        "Kak 50 Gold Skulltula Reward",
-        "GF HBA 1500 Points",
+    random_settings['disabled_locations'] = ["GF HBA 1500 Points",
         "Deku Theater Mask of Truth",
         "DMC GS Crate",
         "DMC Deku Scrub",
         "KF Links House Cow"]
+    conds.include_40_50_skulls(random_settings)
     random_settings['allowed_tricks'] = ["logic_fewer_tunic_requirements", "logic_grottos_without_agony",
         "logic_child_deadhand", "logic_man_on_roof", "logic_dc_jump", "logic_rusted_switches", "logic_windmill_poh",
         "logic_crater_bean_poh_with_hovers", "logic_forest_vines", "logic_goron_city_pot_with_strength",
@@ -114,6 +114,16 @@ def load_weights_file(weights_fname):
         print(f"Plando not generated, please try again.", file=sys.stderr)
         sys.exit(1)
     return weight_dict
+
+def do_dungeon_diving(random_settings):
+    random_settings['triforce_hunt'] = True
+    random_settings['trials'] = "random"
+    random_settings['bridge'] = "open"
+    random_settings['triforce_goal_per_world'] = 7
+    random_settings['locations'] = {"Deku Tree Queen Gohma Heart": "Triforce Piece", "Dodongos Cavern King Dodongo Heart": "Triforce Piece", "Jabu Jabus Belly Barinade Heart": "Triforce Piece",
+        "Bottom of the Well Lens of Truth Chest": "Triforce Piece",  "Forest Temple Phantom Ganon Heart":  "Triforce Piece", "Fire Temple Volvagia Heart": "Triforce Piece", "Water Temple Morpha Heart": "Triforce Piece", 
+        "Shadow Temple Bongo Bongo Heart": "Triforce Piece", "Spirit Temple Twinrova Heart": "Triforce Piece", "Ice Cavern Iron Boots Chest": "Triforce Piece", "Gerudo Training Grounds Maze Path Final Chest": "Triforce Piece", 
+        "Ganons Tower Boss Key Chest": "Triforce Piece"}
 
 
 def main():
@@ -184,10 +194,14 @@ def main():
 
 
     # Add the tricks to the plando
+    
     if STANDARD_TRICKS:
         add_standard_tricks(random_settings)
     if RRL_TRICKS:
         add_rrl_tricks(random_settings)
+
+    if DUNGEON_DIVING:
+        do_dungeon_diving(random_settings)
 
 
     # Draw the starting items, songs, and equipment
