@@ -19,7 +19,7 @@ STANDARD_TRICKS = True # Whether or not to enable all of the tricks in Standard 
 RRL_TRICKS = True # Add the extra tricks that we enable for rando rando
 RRL_CONDITIONALS = True # In rando rando we have a couple conditional cases. Ensure that they are met
 STARTING_ITEMS = True # Draw starting items, songs, and equipment from a geometric distribution
-DUNGEON_DIVING = True # Activate Dungeon Diving mode
+DUNGEON_DIVING = False # Activate Dungeon Diving mode
 
 BROKEN_SETTINGS = [] # If any settings are broken, add their name here and they will be non-randomized
 
@@ -124,6 +124,12 @@ def do_dungeon_diving(random_settings):
 
 
 def main():
+    # Load in command line args
+    if len(sys.argv) >= 2:
+        print(sys.argv)
+        if sys.argv[1] == "Dungeon_dive":
+            global DUNGEON_DIVING 
+            DUNGEON_DIVING  = True 
     # Delete residual files from previous runs
     remove_me = ['blind_random_settings.json', 'ERRORLOG.TXT']
     for file_to_delete in remove_me:
