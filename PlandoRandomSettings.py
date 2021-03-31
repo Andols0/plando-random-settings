@@ -19,7 +19,7 @@ STANDARD_TRICKS = True # Whether or not to enable all of the tricks in Standard 
 RRL_TRICKS = True # Add the extra tricks that we enable for rando rando
 RRL_CONDITIONALS = True # In rando rando we have a couple conditional cases. Ensure that they are met
 STARTING_ITEMS = True # Draw starting items, songs, and equipment from a geometric distribution
-DUNGEON_DIVING = False # Activate Dungeon Diving mode
+DUNGEON_DIVING = True # Activate Dungeon Diving mode
 
 BROKEN_SETTINGS = [] # If any settings are broken, add their name here and they will be non-randomized
 
@@ -116,14 +116,11 @@ def load_weights_file(weights_fname):
     return weight_dict
 
 def do_dungeon_diving(random_settings):
-    random_settings['triforce_hunt'] = True
-    random_settings['trials'] = "random"
+    random_settings['triforce_hunt'] = "true"
+    random_settings['trials_random'] = "true"
     random_settings['bridge'] = "open"
     random_settings['triforce_goal_per_world'] = 7
-    random_settings['locations'] = {"Deku Tree Queen Gohma Heart": "Triforce Piece", "Dodongos Cavern King Dodongo Heart": "Triforce Piece", "Jabu Jabus Belly Barinade Heart": "Triforce Piece",
-        "Bottom of the Well Lens of Truth Chest": "Triforce Piece",  "Forest Temple Phantom Ganon Heart":  "Triforce Piece", "Fire Temple Volvagia Heart": "Triforce Piece", "Water Temple Morpha Heart": "Triforce Piece", 
-        "Shadow Temple Bongo Bongo Heart": "Triforce Piece", "Spirit Temple Twinrova Heart": "Triforce Piece", "Ice Cavern Iron Boots Chest": "Triforce Piece", "Gerudo Training Grounds Maze Path Final Chest": "Triforce Piece", 
-        "Ganons Tower Boss Key Chest": "Triforce Piece"}
+    
 
 
 def main():
@@ -227,6 +224,15 @@ def main():
         'settings': random_settings,
         'file_hash': [version_hash_1, version_hash_2, *random.choices(HASH_ICONS, k=3)]
     }
+    if DUNGEON_DIVING:
+            output = {
+                'settings': random_settings,
+                'file_hash': [version_hash_1, version_hash_2, *random.choices(HASH_ICONS, k=3)],
+		'locations': {"Deku Tree Queen Gohma Heart": "Triforce Piece", "Dodongos Cavern King Dodongo Heart": "Triforce Piece", "Jabu Jabus Belly Barinade Heart": "Triforce Piece",
+                "Bottom of the Well Lens of Truth Chest": "Triforce Piece",  "Forest Temple Phantom Ganon Heart":  "Triforce Piece", "Fire Temple Volvagia Heart": "Triforce Piece", "Water Temple Morpha Heart": "Triforce Piece", 
+                "Shadow Temple Bongo Bongo Heart": "Triforce Piece", "Spirit Temple Twinrova Heart": "Triforce Piece", "Ice Cavern Iron Boots Chest": "Triforce Piece", "Gerudo Training Grounds Maze Path Final Chest": "Triforce Piece", 
+                "Ganons Tower Boss Key Chest": "Triforce Piece"}
+		}
     with open('blind_random_settings.json', 'w') as fp:
         json.dump(output, fp, indent=4)
 
